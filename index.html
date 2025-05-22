@@ -395,13 +395,13 @@
             if (!snap.exists() || !snap.val()?.name) {
               function askName(errMsg) {
                 showPopup({
-                  title: "Insert your nickname (mandatory):",
+                  title: "Inserisci il tuo nickname (obbligatorio):",
                   inputType: "text",
                   okText: "OK",
                   cancelText: null,
                   error: errMsg || "",
                   onOk: name => {
-                    if (!name) return askName("Nickname required!");
+                    if (!name) return askName("Il nickname è obbligatorio!");
                     set(ref(db, "profiles/" + currentUser.uid), {
                       email: currentUser.email,
                       name: name
@@ -611,7 +611,7 @@
       list.innerHTML = "";
 
       const bist = document.createElement("div");
-      bist.innerHTML = `BIST Chat <span class="pin-emoji">📌</span>`;
+      bist.innerHTML = `Generale <span class="pin-emoji">📌</span>`;
       bist.className = "chat-item active";
       bist.onclick = () => switchChat("bist", bist);
       list.appendChild(bist);
@@ -633,7 +633,7 @@
       const list = document.getElementById("chat-list");
       let selectedChatId = null;
       const selected = list.querySelector(".chat-item.active");
-      if (selected && selected.textContent !== "📌BIST Chat") {
+      if (selected && selected.textContent !== "📌Chat Generale") {
         const idx = [...list.children].indexOf(selected) - 1;
         if (idx >= 0) {
           const chatIds = Object.keys(chats);
@@ -743,14 +743,14 @@
 
     function addUserChat() {
       showPopup({
-        title: "Insert the email of the user you want to chat with:",
+        title: "Inserisci l'email di con chi vuoi chattare:",
         inputType: "email",
-        okText: "Add",
-        cancelText: "Cancel",
+        okText: "Aggiungi",
+        cancelText: "Cancella",
         onOk: email => {
           if (!email) return;
           if (email === currentUser.email) {
-            showAlert("You can't create a chat with yourself!");
+            showAlert("Non puoi inserire la tua email!");
             return;
           }
           const safeCurrent = safeEmail(currentUser.email);
@@ -773,7 +773,7 @@
                 }, 500);
               });
             } else {
-              showAlert("User not found...");
+              showAlert("Utente non trovato...");
             }
           });
         }
@@ -782,10 +782,10 @@
 
     function changeDisplayName() {
       showPopup({
-        title: "Insert your new nickname:",
+        title: "Inserisci il nuovo nickname:",
         inputType: "text",
-        okText: "OK",
-        cancelText: "Cancel",
+        okText: "Inserisci",
+        cancelText: "Cancella",
         onOk: newName => {
           if (!newName || !currentUser) return;
           set(ref(db, "profiles/" + currentUser.uid + "/name"), newName);
@@ -817,22 +817,22 @@
     </div>
     <div id="main">
       <div id="chat-header">
-        <span id="chat-name">BIST Chat</span>
+        <span id="chat-name">Generale</span>
         <div>
-	  <button id="add-btn" class="chat-button">➕ Add User</button>
-          <button id="name-btn" class="chat-button">✏️ Edit Nickname</button>
+	  <button id="add-btn" class="chat-button">➕ Aggiungi utente</button>
+          <button id="name-btn" class="chat-button">✏️ Modifica Nick</button>
           <button id="logout-btn" class="chat-button">🚪 Logout</button>
         </div>
       </div>
       <div id="chat-area" style="position: relative;">
         <div id="chat-messages"></div>
         <div id="chat-loader">
-          <div class="loader-text">Loading the BIST Chat...</div>
+          <div class="loader-text">Caricamento...</div>
         </div>
       </div>
       <div id="chat-input">
-        <textarea id="msg" placeholder="Insert a message..." rows="1"></textarea>
-        <button id="send-btn">Send</button>
+        <textarea id="msg" placeholder="Inserisci messaggio..." rows="1"></textarea>
+        <button id="send-btn">Invia</button>
       </div>
     </div>
   </div>
