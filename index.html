@@ -724,7 +724,7 @@
       document.querySelectorAll(".chat-item").forEach(el => el.classList.remove("active"));
       if (element) element.classList.add("active");
       if (chatId === "bist") {
-        document.getElementById("chat-name").innerText = "BIST Chat";
+        document.getElementById("chat-name").innerText = "Chat Generale";
       } else {
         get(ref(db, "users/" + currentUser.uid + "/chats/" + chatId)).then(snap => {
           const email = snap.val();
