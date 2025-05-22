@@ -633,7 +633,7 @@
       const list = document.getElementById("chat-list");
       let selectedChatId = null;
       const selected = list.querySelector(".chat-item.active");
-      if (selected && selected.textContent !== "📌Chat Generale") {
+      if (selected && selected.textContent !== "📌<b>Chat Generale</b>") {
         const idx = [...list.children].indexOf(selected) - 1;
         if (idx >= 0) {
           const chatIds = Object.keys(chats);
@@ -724,7 +724,7 @@
       document.querySelectorAll(".chat-item").forEach(el => el.classList.remove("active"));
       if (element) element.classList.add("active");
       if (chatId === "bist") {
-        document.getElementById("chat-name").innerText = "Chat Generale";
+        document.getElementById("chat-name").innerText = "<b>Chat Generale</b>";
       } else {
         get(ref(db, "users/" + currentUser.uid + "/chats/" + chatId)).then(snap => {
           const email = snap.val();
